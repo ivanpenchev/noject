@@ -58,28 +58,36 @@ model('user', {
         target: 'user',
         noun: 'friend',
         plural: 'friends'
-    }),
-
+    })
 });
 
 console.log('-------------------------------------------');
 
 
-db.user.getById(497).done(function (newmodel) {
+db.user.getById(497).then(function (newmodel) {
+    console.log(newmodel);
     //newmodel.username = 'aleksandrenko';
 
     //newmodel.save();
 
-    console.log(newmodel);
-    //newmodel.addFriend(495);
-
-    newmodel.getFriends().done(function(friends) {
-        console.log(friends);
+    /*
+    newmodel.removeFriend(495).done(function(result) {
+        //console.log(result);
+        //console.log('success removing friend');
+    }).fail(function(err) {
+        console.log('err');
     });
 
-}).fail(function (err) {
-        console.log(err);
-    });
+    //newmodel.getFriends().done(function(friends) {
+    //    console.log(friends);
+    //});
+    */
+
+    return db.user.getById(497);
+
+}).then(function(result) {
+    console.log(result);
+});
 
 
 /*
