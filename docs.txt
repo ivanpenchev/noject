@@ -1,0 +1,264 @@
+
+Fields
+  String
+    min_length
+    max_length
+    help_text
+    index
+    unique
+    choices
+    default
+  Int
+    min
+    max
+    help_text
+    choices
+    default
+  Number
+    min
+    max
+    help_text
+    choices
+    default
+  Boolean
+    default
+    help_text
+  Email
+    min_length
+    max_length
+    help_text
+    index
+    unique
+    default
+  Url
+    min_length
+    max_length
+    help_text
+    index
+    default
+  Img
+    min_length
+    max_length
+    help_text
+    default
+  DataTime
+    default
+    help_text
+  Slug
+    auto_filled
+      based_on
+    min_length
+    max_length
+    help_text
+    index
+    unique
+    default
+
+
+//i will use ony outgoing relationships
+Rel
+  type
+  target
+  noun
+  help_text
+  plural
+  data
+    {}
+
+
+db
+
+db.modelType
+  promise {modelInstance} create({key:val})
+  promise [modelInstance] filter({where:something})
+  promise [modelInstance] getAll()
+  promise {modelInstance} getById(int)
+  promise [modelInstance] getByIndex()
+  promise [return] query
+
+
+model
+  type = ''
+  scheme = {}
+  save() promise
+  delete() promise
+  getRelationshipNodes() promise [models]
+  filterRelationshipNodes() promise [models]
+  createRelationship(nodeId) promise bool
+  delRelationshipWith(nodeId) promise bool
+
+
+
+
+//example
+
+model('user', {
+    ...
+    friends: Rel('is_friends_with', {
+      target: 'user',
+      noun: 'friend'
+    }),
+    ...
+  });
+
+var user = db.create({name: 'nikolai aleksandreko', ...});
+var users = db.filter([
+  'age < 30',
+  'registrationData > 10.01.2012'
+]);
+
+var oldFriends = newuser.filterFriends([
+  'age > 30'
+]);
+
+newuser.save();
+
+friends = newuser.getFriends();
+newuser.addFriend(newFriendNode);
+newuser.removeFriend(friendNode);
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -----------------------------------------
+// NOTES
+// -----------------------------------------
+
+noject.db
+noject.schemas
+noject.models
+noject.fields
+noject.validator
+
+
+// -----------------------------------------
+// struktura na validator
+// -----------------------------------------
+
+validator.validate(modelType) - vzema model-a s datata mu, vzema i schemata mu i validira, vrushta true/false s errors
+
+
+
+// -----------------------------------------
+// struktura na schemas
+// -----------------------------------------
+
+schemas.registerModel(modelType, schema)
+schemas.modelType = current models' schema
+
+
+
+// -----------------------------------------
+// struktura na fields
+// -----------------------------------------
+
+fields.String()
+fields.Email()
+...
+
+
+availableRules = 'min_length, max_length...';
+for(var key in params) {
+  if( availableRules.indefOf(key) === -1) {
+    console.log(key + ' is not possible rule for string');
+  }
+}
+
+
+
+// -----------------------------------------
+// struktura na db
+// -----------------------------------------
+
+db.query
+db.registerModel
+db.model.getById
+db.model.getAll
+db.model.create
+db.model.getByIndex
+
+
+
+// -----------------------------------------
+// struktura na model
+// -----------------------------------------
+
+model.data - dannite za samiq model key:val
+model.type - string, koito pazi imeto na modela - user/badge/activity...
+model._node - reprezentaciq na model-a ot rest api-to na neo4j, za da moje da se vikat metodite kum nego
+model.save
+model.getRelationships
+model.addRelationship
+model.removeRelationship
+model.delete
+model.indexes
+
+
+
+
+db.get node from server
+  server node
+    validirane na dannite po shemata na iskaniq model
+      vzemane na edin model suzdaden po schema
+      nabutvane na dannite ot syrvarniq model v nego
+      opisvane na indeksite, koito se predpolaga che ima
+      vrushtane na schema modela s dannite ot survara prez promise
+
+
+
+model.save na schema model
+  validirane na dannite
+  ako nqma opisani indeksi se suzdavat indeksi - sus server requests, ako ima opisani indeksi znachi ne e nov i e vzet ot survura
+  vrushtane na success prez prommise
+
+
+
+model.getFriends
+  request do survura s base index-a na modela (nodes:type:modelType) i relationshipa, ko poito se iskat
+  cikul za
+    validirane na dannite
+    vzemane na edin model suzdaden po schema
+    nabutvane na dannite ot syrvarniq model v nego
+    opisvane na indeksite, koito se predpolaga che ima
+    zapisvane v 1 masiv s scheme modeli
+
+
+
+model.deleteFriend(nodeid)
+  vzemane na server node po nodeid
+  premahvane an relationship-a kym krainiq survur node
+
+
+
+model.delete
+  proverka dali ima indeksi
+    ako nqma, znachi e tokushto suzdaden i ne zapisan
+    ako ima, znachi e zapisvan i indeksite trqbva da se iztriqt zaedno s node-a
+      iztrivane na indexes
+      iztrivane na node
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*****************//*****************//*****************//*****************//*****************/
+
+createModel - suzdava se tipa model s validaciite i methodite
+suzdava se instancia na modela po tip

@@ -1,0 +1,18 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.2.4",
+    "q": "0.9.3",
+    "urls": "*",
+    "hbs": "2.1.0",
+    "validator": "1.1.1",
+    "noject": "*"
+  }
+}
+
+
