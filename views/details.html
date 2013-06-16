@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
+
+    <script type="text/javascript" src="/assets/js/vendors/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/bootstrap/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div style="padding: 20px; background: #fafafa; border-bottom: solid 1px #eee">
+    <a href="/users/" class="btn">users list/no paging</a>
+    <a href="/create/" class="btn">create new user</a>
+</div>
+
+    <ul>
+        <h1>Details</h1>
+        <b>username:</b> {{data.username}}         <br>
+        <b>id:</b> {{data.id}}                     <br>
+        <b>email:</b> {{data.email}}               <br>
+    </ul>
+    <a href="/crud/{{data.id}}" class="btn">crud button</a>
+</body>
+</html>

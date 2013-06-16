@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
+
+    <script type="text/javascript" src="/assets/js/vendors/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/bootstrap/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div style="padding: 20px; background: #fafafa; border-bottom: solid 1px #eee">
+    <a href="/users/" class="btn">users list/no paging</a>
+    <a href="/create/" class="btn">create new user</a>
+</div>
+
+<ul>
+    <h1>Details</h1>
+
+    <form action="./{{data.id}}" method="post">
+        <b>username:</b>    <input value="{{data.username}}" name="username" type="text" />             </br>
+        <b>id:</b>          <input value="{{data.id}}" name="id" type="text" disabled />          </br>
+        <b>email:</b>       <input value="{{data.email}}" name="email" type="email" />               </br>
+
+        <button class="btn">save changes</button>
+    </form>
+</ul>
+</body>
+</html>
